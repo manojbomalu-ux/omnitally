@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Privacy Policy">
+  <div class="mx-auto max-w-2xl py-16 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Privacy Policy</h1>
+    <div class="prose mx-auto">
+      <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+      <p>Our Privacy Policy explains how we handle your information when you use our online calculators. We are committed to protecting your privacy and being transparent about our practices.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Information We Collect</h2>
+      <p>We do not collect, store, or share any personal information you enter into our calculators. All calculations are performed locally in your browser using JavaScript.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Cookies and Tracking</h2>
+      <p>We use essential cookies to remember your preferences and improve your experience. We do not use tracking cookies, analytics scripts, or third-party advertising networks that collect personal data.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Links to Other Websites</h2>
+      <p>Our website may contain links to affiliate partner websites. We are not responsible for the privacy practices of those websites. We encourage you to read their privacy policies before providing any personal information.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Children's Privacy</h2>
+      <p>Our website is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Changes to This Policy</h2>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+      <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+      <p>If you have any questions about our Privacy Policy, please contact us at: <a href="/contact" class="text-blue-600 hover:underline">Contact Page</a></p>
+
+      <p class="mt-6 text-sm text-gray-500">
+        Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+    </div>
+  </div>
+</Layout>

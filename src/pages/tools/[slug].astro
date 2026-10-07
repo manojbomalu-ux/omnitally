@@ -1,0 +1,131 @@
+---
+// Import data and types
+import toolsData from '../../data/tools.json';
+import { Calculator } from '../../components/Calculator.tsx';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const tools = Array.isArray(toolsData) ? toolsData : (toolsData.tools || []);
+  return tools.map((tool) => ({
+    params: { slug: tool.slug },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+
+if (!tool) {
+  return Astro.redirect('/404');
+}
+---
+<link rel="canonical" href={`https://omnitally.com/tools/${tool.slug}`} />
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": tool.title,
+  "description": tool.description,
+  "applicationCategory": "FinanceApplication",
+  "url": `https://omnitally.com/tools/${tool.slug}`,
+  "operatingSystem": "All"
+})} />
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": tool.faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+})} />
+
+<Layout
+  title={tool.title}
+  headTitle={`${tool.title} | OmniTally`}
+  ogTitle={tool.title}
+  ogDescription={tool.description}
+  ogImage="https://omnitally.com/og-image.png"
+  twitterCard="summary_large_image"
+>
+  {/* The main content goes here */}
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-center mb-8">{tool.title}</h1>
+
+      {/* Calculator Island hydrated on client */}
+      <div class="p-6">
+        <Calculator client:load
+          slug={tool.slug}
+          title={tool.title}
+          currency={tool.currency}
+          optimizationRule={tool.optimizationRule}
+          staticBreakdown={tool.staticBreakdown}
+          faqItems={tool.faqItems}
+          defaultV1={tool.defaultV1}
+          defaultV2={tool.defaultV2}
+          mode={tool.mode}
+        />
+      </div>
+
+      {/* Financial Disclaimer */}
+      <div class="p-6 bg-yellow-50 border-l-4 border-yellow-400">
+        <p class="text-sm text-yellow-800">
+          Disclaimer: For illustrative and educational purposes only. Does not constitute tax, legal, or financial advice. Consult a licensed CPA, EA, or HMRC-authorized accountant.
+        </p>
+      </div>
+
+      {/* Static Fallback Table for SEO */}
+      <div class="border-t border-gray-200">
+        <div class="p-6">
+          <h2 class="text-xl font-semibold mb-4">Sample Calculations</h2>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  {tool.staticBreakdown.length > 0 &&
+                    Object.keys(tool.staticBreakdown[0])
+                      .filter(key => !['result'].includes(key)) // Exclude 'result' from columns
+                      .map((header) => (
+                        <th
+                          key={header}
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          {header.charAt(0).toUpperCase() + header.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                        </th>
+                      ))}
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Result
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {tool.staticBreakdown.map((row, index) => (
+                  <tr key={index} class={index % 2 === 1 ? 'bg-gray-50' : ''}>
+                    {Object.keys(row)
+                      .filter(key => !['result'].includes(key))
+                      .map((key) => (
+                        <td
+                          key={key}
+                          class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                        >
+                          {row[key as keyof typeof row]}
+                        </td>
+                      ))}
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+                      {row.result}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-2 text-sm text-gray-500 text-center">
+              *Sample calculations for demonstration purposes. Actual results vary based on inputs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

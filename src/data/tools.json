@@ -1,0 +1,351 @@
+[
+  {
+    "slug": "us-1099-freelance-tax-calculator",
+    "title": "US 1099 Freelance Tax Calculator",
+    "description": "Calculate your take-home pay as a 1099 freelancer or S-Corp owner in the United States.",
+    "currency": "$",
+    "locale": "en-US",
+    "defaultV1": 95000,
+    "defaultV2": 12000,
+    "mode": "1099 Sole Prop",
+    "optimizationRule": "If Net Profit > $80,000, filing as an S-Corporation can save ~$4,000+ in self-employment taxes via distributions.",
+    "formulaVariables": {
+      "grossRevenue": {
+        "label": "Gross Revenue ($)",
+        "type": "number",
+        "min": 0,
+        "step": 1000,
+        "default": 95000
+      },
+      "businessExpenses": {
+        "label": "Business Expenses ($)",
+        "type": "number",
+        "min": 0,
+        "step": 500,
+        "default": 12000
+      },
+      "mode": {
+        "label": "Business Structure",
+        "type": "select",
+        "options": [
+          "1099 Sole Prop",
+          "S-Corp"
+        ],
+        "default": "1099 Sole Prop"
+      }
+    },
+    "constants": {
+      "SECA_TAX_RATE": 0.153,
+      "STANDARD_DEDUCTION": 16100
+    },
+    "affiliateTargets": [
+      {
+        "name": "Gusto",
+        "url": "https://gusto.com"
+      },
+      {
+        "name": "QuickBooks Self-Employed",
+        "url": "https://quickbooks.intuit.com/self-employed/"
+      }
+    ],
+    "staticBreakdown": [
+      {
+        "scenario": "Low",
+        "grossRevenue": "$50,000",
+        "businessExpenses": "$5,000",
+        "netProfit": "$45,000",
+        "secaTax": "$6,885",
+        "federalTax": "$3,236",
+        "totalTax": "$10,121",
+        "result": "$34,879"
+      },
+      {
+        "scenario": "Medium",
+        "grossRevenue": "$95,000",
+        "businessExpenses": "$12,000",
+        "netProfit": "$83,000",
+        "secaTax": "$12,699",
+        "federalTax": "$9,768",
+        "totalTax": "$22,467",
+        "result": "$60,533"
+      },
+      {
+        "scenario": "High",
+        "grossRevenue": "$150,000",
+        "businessExpenses": "$20,000",
+        "netProfit": "$130,000",
+        "secaTax": "$19,890",
+        "federalTax": "$20,453",
+        "totalTax": "$40,343",
+        "result": "$89,658"
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "What is the self-employment tax rate?",
+        "answer": "The self-employment tax rate is 15.3%, which consists of 12.4% for Social Security and 2.9% for Medicare."
+      },
+      {
+        "question": "When should I consider forming an S-Corp?",
+        "answer": "If your net profit (gross revenue minus expenses) exceeds $80,000, forming an S-Corp can save you on self-employment taxes by allowing you to take a portion of your income as a distribution, which is not subject to self-employment tax."
+      }
+    ]
+  },
+  {
+    "slug": "uk-contractor-ir35-calculator",
+    "title": "UK Contractor IR35 Calculator",
+    "description": "Determine your take-home pay as a contractor inside or outside IR35 in the United Kingdom.",
+    "currency": "£",
+    "locale": "en-GB",
+    "defaultV1": 550,
+    "defaultV2": 220,
+    "mode": "Outside IR35",
+    "optimizationRule": "Income between £100,000 and £125,140 triggers the 60% effective marginal tax trap due to Personal Allowance tapering. Maximizing private pension contributions restores your £12,570 tax-free allowance.",
+    "formulaVariables": {
+      "dayRate": {
+        "label": "Daily Rate (£)",
+        "type": "number",
+        "min": 0,
+        "step": 10,
+        "default": 550
+      },
+      "workingDays": {
+        "label": "Working Days Per Year",
+        "type": "number",
+        "min": 0,
+        "max": 365,
+        "step": 1,
+        "default": 220
+      },
+      "mode": {
+        "label": "IR35 Status",
+        "type": "select",
+        "options": [
+          "Outside IR35",
+          "Inside IR35"
+        ],
+        "default": "Outside IR35"
+      }
+    },
+    "constants": {
+      "SMALL_PROFITS_RATE": 0.19,
+      "MARGINAL_TAX_TRAP_START": 100000,
+      "MARGINAL_TAX_TRAP_END": 125140
+    },
+    "affiliateTargets": [
+      {
+        "name": "FreeAgent",
+        "url": "https://freeagent.com"
+      },
+      {
+        "name": "Tide Bank",
+        "url": "https://tide.co"
+      }
+    ],
+    "staticBreakdown": [
+      {
+        "scenario": "Low",
+        "mode": "Inside IR35",
+        "grossIncome": "£60,000",
+        "incomeTax": "£9,486",
+        "nic": "£4,719",
+        "totalTaxNic": "£14,205",
+        "result": "£45,795"
+      },
+      {
+        "scenario": "Low",
+        "mode": "Outside IR35",
+        "grossIncome": "£60,000",
+        "incomeTax": "£9,486",
+        "nic": "£3,767",
+        "totalTaxNic": "£13,253",
+        "result": "£46,747"
+      },
+      {
+        "scenario": "Medium",
+        "mode": "Inside IR35",
+        "grossIncome": "£121,000",
+        "incomeTax": "£35,832",
+        "nic": "£5,939",
+        "totalTaxNic": "£41,771",
+        "result": "£79,229"
+      },
+      {
+        "scenario": "Medium",
+        "mode": "Outside IR35",
+        "grossIncome": "£121,000",
+        "incomeTax": "£35,832",
+        "nic": "£4,987",
+        "totalTaxNic": "£40,819",
+        "result": "£80,181"
+      },
+      {
+        "scenario": "High",
+        "mode": "Inside IR35",
+        "grossIncome": "£184,000",
+        "incomeTax": "£58,319",
+        "nic": "£7,199",
+        "totalTaxNic": "£65,518",
+        "result": "£118,483"
+      },
+      {
+        "scenario": "High",
+        "mode": "Outside IR35",
+        "grossIncome": "£184,000",
+        "incomeTax": "£58,319",
+        "nic": "£6,247",
+        "totalTaxNic": "£64,566",
+        "result": "£119,435"
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "What is IR35?",
+        "answer": "IR35 is a piece of UK tax legislation that affects contractors who work through their own limited company. It determines whether you should be taxed as an employee or as a self-employed individual."
+      },
+      {
+        "question": "How is my IR35 status determined?",
+        "answer": "Your IR35 status is determined by your working practices and contract terms. Key factors include control, substitution, and mutuality of obligation. If your contract resembles that of an employee, you may be deemed inside IR35."
+      }
+    ]
+  },
+  {
+    "slug": "au-contractor-sole-trader-tax-calculator",
+    "title": "Australia Contractor & Sole Trader Tax Calculator",
+    "description": "Calculate your take-home pay as a contractor or sole trader in Australia.",
+    "currency": "A$",
+    "locale": "en-AU",
+    "defaultV1": 90000,
+    "defaultV2": 5000,
+    "mode": "standard",
+    "optimizationRule": "Consider making additional superannuation contributions to reduce your taxable income while boosting your retirement savings.",
+    "formulaVariables": {
+      "grossIncome": {
+        "label": "Gross Income ($)",
+        "type": "number",
+        "min": 0,
+        "step": 1000,
+        "default": 90000
+      },
+      "workRelatedExpenses": {
+        "label": "Work-Related Expenses ($)",
+        "type": "number",
+        "min": 0,
+        "step": 500,
+        "default": 5000
+      }
+    },
+    "constants": {
+      "SUPERANNUATION_RATE": 0.115,
+      "MEDICARE_LEVY_RATE": 0.02
+    },
+    "affiliateTargets": [
+      {
+        "name": "Hnry",
+        "url": "https://hnry.com.au"
+      },
+      {
+        "name": "MYOB",
+        "url": "https://www.myob.com/au/"
+      }
+    ],
+    "staticBreakdown": [
+      {
+        "scenario": "Low",
+        "grossIncome": "$50,000",
+        "workRelatedExpenses": "$2,000",
+        "incomeTax": "$4,547",
+        "medicareLevy": "$960",
+        "superannuation": "$5,750",
+        "netTakeHome": "$38,743"
+      },
+      {
+        "scenario": "Medium",
+        "grossIncome": "$90,000",
+        "workRelatedExpenses": "$5,000",
+        "incomeTax": "$19,717",
+        "medicareLevy": "$1,700",
+        "superannuation": "$10,350",
+        "netTakeHome": "$58,233"
+      },
+      {
+        "scenario": "High",
+        "grossIncome": "$150,000",
+        "workRelatedExpenses": "$10,000",
+        "incomeTax": "$41,667",
+        "medicareLevy": "$3,000",
+        "superannuation": "$17,250",
+        "netTakeHome": "$88,083"
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "What is the Medicare levy?",
+        "answer": "The Medicare levy is 2% of your taxable income to fund Australia's public health system."
+      },
+      {
+        "question": "Do I need to pay superannuation as a sole trader?",
+        "answer": "As a sole trader, you're responsible for your own superannuation. You can make personal deductible contributions to reduce your taxable income while saving for retirement."
+      }
+    ]
+  },
+  {
+    "slug": "us-quarterly-estimated-tax-calculator",
+    "title": "US Quarterly Estimated Tax Calculator",
+    "description": "Calculate your quarterly estimated tax payments (IRS 1040-ES) based on your annual tax liability.",
+    "currency": "$",
+    "locale": "en-US",
+    "defaultV1": 10000,
+    "defaultV2": 0,
+    "mode": "standard",
+    "optimizationRule": "Use Form 1040-ES to calculate and pay your estimated quarterly taxes. Payments are due April 15, June 16, September 15, and January 15 of the following year.",
+    "formulaVariables": {
+      "estimatedAnnualTax": {
+        "label": "Estimated Annual Tax ($)",
+        "type": "number",
+        "min": 0,
+        "step": 100,
+        "default": 10000
+      },
+      "withholding": {
+        "label": "Tax Withholding ($)",
+        "type": "number",
+        "min": 0,
+        "step": 100,
+        "default": 0
+      }
+    },
+    "constants": {},
+    "affiliateTargets": [],
+    "staticBreakdown": [
+      {
+        "scenario": "Low",
+        "estimatedAnnualTax": "$5,000",
+        "withholding": "$0",
+        "quarterlyPayment": "$1,250"
+      },
+      {
+        "scenario": "Medium",
+        "estimatedAnnualTax": "$10,000",
+        "withholding": "$0",
+        "quarterlyPayment": "$2,500"
+      },
+      {
+        "scenario": "High",
+        "estimatedAnnualTax": "$20,000",
+        "withholding": "$0",
+        "quarterlyPayment": "$5,000"
+      }
+    ],
+    "faqItems": [
+      {
+        "question": "Who needs to pay estimated quarterly taxes?",
+        "answer": "Generally, you must pay estimated quarterly taxes if you expect to owe at least $1,000 in tax for the current year after subtracting your withholding and refundable credits."
+      },
+      {
+        "question": "What happens if I miss a quarterly estimated tax payment?",
+        "answer": "You may owe a penalty for underpayment of estimated tax. The penalty is calculated based on the amount underpaid, the period it was underpaid, and the interest rate for underpayments set quarterly by the IRS."
+      }
+    ]
+  }
+]
